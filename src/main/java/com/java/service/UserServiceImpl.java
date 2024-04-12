@@ -2,6 +2,7 @@ package com.java.service;
 
 import com.java.dto.UserRequest;
 import com.java.entity.User;
+import com.java.exception.UserNotFoundException;
 import com.java.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +33,6 @@ public class UserServiceImpl implements UserService {
     }
 
     public User getAnUser(int id) {
-        return userRepository.findById(id).orElseThrow();
+        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("user not found"));
     }
 }
